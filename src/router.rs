@@ -3,7 +3,7 @@ use std::sync::{Arc, Mutex};
 use hyper::Method;
 
 use crate::message::{HttpServerRequest, HttpServerResponse};
-use crate::server::{HyperRequest, HyperResponse};
+use crate::server::HyperRequest;
 
 #[derive(Clone)]
 pub enum Route {
