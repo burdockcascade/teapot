@@ -2,6 +2,9 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE-MIT)
 [![GHA Build Status](https://github.com/burdockcascade/teapot/workflows/CI/badge.svg)](https://github.com/burdockcascade/teapot/actions?query=workflow%3ACI)
 
+## Status
+This project is in early development and is not yet ready for production use.
+
 ## Example
 ```rust
 fn main() {
@@ -40,3 +43,6 @@ impl RouteHandler for MyHandler {
     }
 }
 ```
+
+## License
+Licensed under the MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
