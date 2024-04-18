@@ -38,7 +38,7 @@ impl RouteHandler for MyHandler {
         HttpServerResponse::builder()
             .status(StatusCode::OK)
             .header("Content-Type", "text/plain")
-            .body(message)
+            .body(Body::text(message))
             .build()
     }
 }
