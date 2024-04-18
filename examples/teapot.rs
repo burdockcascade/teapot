@@ -1,10 +1,11 @@
-use std::collections::HashMap;
+
 use std::sync::{Arc, Mutex};
+use hyper::StatusCode;
 
 use log::{info, LevelFilter};
 use simplelog::{ColorChoice, Config, TerminalMode, TermLogger};
 
-use teapot::message::{HttpServerRequest, HttpServerResponse};
+use teapot::message::{Body, HttpServerRequest, HttpServerResponse};
 use teapot::router::{RouteBuilder, RouteHandler};
 use teapot::server::HttpServer;
 
@@ -19,7 +20,7 @@ fn main() {
     
     info!("Starting teapot server example...");
     
-    let my_teapot = Arc::new(Mutex::new(MyHandler { counter: 0 }));
+    let my_teapot = Arc::new(Mutex::new(TeaMaker { counter: 0 }));
     
     HttpServer::builder()
         .address("127.0.0.1")
@@ -33,20 +34,19 @@ fn main() {
 
 }
 
-struct MyHandler {
+struct TeaMaker {
     counter: u16
 }
 
-impl RouteHandler for MyHandler {
-    fn on_request(&mut self, request: &HttpServerRequest) -> HttpServerResponse {
+impl RouteHandler for TeaMaker {
+    fn on_request(&mut self, _request: &HttpServerRequest) -> HttpServerResponse {
         
         self.counter += 1;
         let message = format!("Serving cup number {}", self.counter);
         
-        HttpServerResponse {
-            status: 200,
-            headers: HashMap::new(),
-            body: message.into_bytes(),
-        }
+        HttpServerResponse::builder()
+            .status(StatusCode::IM_A_TEAPOT)
+            .body(Body::text(message))
+            .build()
     }
 }
